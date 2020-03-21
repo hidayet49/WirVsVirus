@@ -10,7 +10,7 @@ export class QuestionaireComponent implements OnInit {
 
   public item = 0;
   public questionaire = new Questionaire();
-  private itemCount = 36;
+  private itemCount = 15;
 
   constructor() { }
 
