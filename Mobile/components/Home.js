@@ -20,7 +20,7 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
   }
 
   const completeJob = async (id) => {
-  datas[activeSections[0]].ok = false;
+  setDatas(datas[activeSections[0]].ok= false);
       alert("Thank You!!");
        /*try {
         const response = await fetch(`${backendUrl}/swabjob/complete`, {
@@ -72,7 +72,7 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
   };
   const acceptJob = async (id) => {
     alert ("The job is accepted")
-    datas[activeSections[0]].ok=true;
+    setDatas(datas[activeSections[0]].ok=true);
     // console.log("Accept "+ global.deneme);
     // try {
     //   const response = await fetch(`${backendUrl}/swabJobs/accept`, {
