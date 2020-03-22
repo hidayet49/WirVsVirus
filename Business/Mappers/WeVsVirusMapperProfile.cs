@@ -35,7 +35,6 @@ namespace WeVsVirus.Business.Mappers
             CreateMap<AddressViewModel, Address>();
 
             CreateMap<SwabJobMatch, SwabJobMatchViewModel>()
-            // TODO uncomment
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SwabJob.Id))
             .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Firstname))
             .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Firstname))

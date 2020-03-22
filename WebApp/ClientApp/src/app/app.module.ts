@@ -13,6 +13,7 @@ import { FetchDataComponent } from './components/fetch-data/fetch-data.component
 import { AppRouting } from './app.routing';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CustomAngularMaterialModule } from './modules/custom-angular-material/custom-angular-material.module';
+import { UserSignupConfirmationComponent } from './components/user-signup-confirmation/user-signup-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CustomAngularMaterialModule } from './modules/custom-angular-material/c
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    UserSignupConfirmationComponent
   ],
   imports: [
     CommonModule,
