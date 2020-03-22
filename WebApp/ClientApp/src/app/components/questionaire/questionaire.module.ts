@@ -9,6 +9,16 @@ import { ItemSmokingSituationComponent } from './item-smoking-situation/item-smo
 import { ItemTraveledComponent } from './item-traveled/item-traveled.component';
 import { ItemHeinsbergComponent } from './item-heinsberg/item-heinsberg.component';
 import { FormsModule } from '@angular/forms';
+import { ItemForeignCountriesComponent } from './item-foreign-countries/item-foreign-countries.component';
+import { ItemContactToPositiveComponent } from './item-contact-to-positive/item-contact-to-positive.component';
+import { ItemFeverComponent } from './item-fever/item-fever.component';
+import { ItemShiverComponent } from './item-shiver/item-shiver.component';
+import { ItemDefeatedComponent } from './item-defeated/item-defeated.component';
+import { ItemAchingLimbsComponent } from './item-aching-limbs/item-aching-limbs.component';
+import { ItemCouchComponent } from './item-couch/item-couch.component';
+import { ItemSnuffComponent } from './item-snuff/item-snuff.component';
+import { ItemDiarrhoeaComponent } from './item-diarrhoea/item-diarrhoea.component';
+import { ItemSoreThroatComponent } from './item-sore-throat/item-sore-throat.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +28,17 @@ import { FormsModule } from '@angular/forms';
     ItemWorkingSituationComponent,
     ItemSmokingSituationComponent,
     ItemTraveledComponent,
-    ItemHeinsbergComponent
+    ItemHeinsbergComponent,
+    ItemForeignCountriesComponent,
+    ItemContactToPositiveComponent,
+    ItemFeverComponent,
+    ItemShiverComponent,
+    ItemDefeatedComponent,
+    ItemAchingLimbsComponent,
+    ItemCouchComponent,
+    ItemSnuffComponent,
+    ItemDiarrhoeaComponent,
+    ItemSoreThroatComponent
   ],
   imports: [
     RouterModule.forChild([
