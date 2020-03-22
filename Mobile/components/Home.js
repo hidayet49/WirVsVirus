@@ -30,7 +30,9 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
     setActiveSections(index)
   }
   const completeJob = async (id) => {
-  setDatas(datas[activeSections[0]].ok= false);
+  const newData=[...datas]
+  newData[activeSections[0]].ok= false
+  setDatas(newData);
       alert("Thank You!!");
        /*try {
         const response = await fetch(`${backendUrl}/swabjob/complete`, {
