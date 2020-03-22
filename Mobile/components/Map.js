@@ -1,12 +1,12 @@
-import React from "react";
-import MapView from 'react-native-maps';
+import React,{ useRef } from "react";
+import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Text, View, PermissionsAndroid,Platform } from "react-native";
-import { Marker } from 'react-native-maps';
 
 function Map({ navigation }) {
-  const [currentLocation, setCurrentLocation] = React.useState({latitude: 0,
-    longitude: 0,});
-    React.useEffect(() => {
+  const [currentLocation, setCurrentLocation] = React.useState({latitude: 0,longitude: 0,});
+  const mapRef = useRef();  
+  
+  React.useEffect(() => {
       // Fetch the token from storage then navigate to our appropriate place
       const fetchLocation = ()=> {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -20,6 +20,10 @@ function Map({ navigation }) {
         }
   
         setCurrentLocation(currentLocation)
+        mapRef.current.fitToCoordinates([currentLocation],{
+          edgePadding: { top: 120, right: 120, bottom: 120, left: 120 },
+          animated: true,
+        });
       },
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000});
@@ -41,6 +45,7 @@ function Map({ navigation }) {
   return (
     <View style={styles.rootContainer}>
     <MapView 
+    ref={mapRef}
     style={styles.mapStyle} 
     showsUserLocation = {true}
     showsMyLocationButton ={true}
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
       },
       mapStyle: {
-        flex: 0.7,
+        flex: 1,
       },
       mapMarker: {
         zIndex: 1000,

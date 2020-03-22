@@ -4,6 +4,7 @@ import data from "../data";
 import Accordion from "react-native-collapsible/Accordion";
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
+import Map from './Map'
 export default function Home(navigation,route) {
 
   const [activeSections, setActiveSections] = React.useState([]);
@@ -119,7 +120,9 @@ export default function Home(navigation,route) {
   };
 
   return (
-    <ScrollView>
+    <View style ={{flex: 1}}>
+      <Map style ={{flex: 0.7}}></Map>
+    <ScrollView style={{flex:0.3}}>
       <Accordion
         sections={data}
         activeSections={activeSections}
@@ -131,6 +134,7 @@ export default function Home(navigation,route) {
         }}
       />
     </ScrollView>
+    </View>
   );
 }
 
