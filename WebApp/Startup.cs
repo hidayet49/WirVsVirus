@@ -115,7 +115,7 @@ namespace WeVsVirus.WebApp
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services, ApplicationDbContext databaseContext)
         {
             //migrate when startup project
-            //databaseContext.Database.Migrate();
+            databaseContext.Database.Migrate();
             if (env.IsDevelopment() || env.IsEnvironment("Development.Local"))
             {
                 app.UseStatusCodePages();
