@@ -18,7 +18,17 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
     createOpenLink({ travelType:'drive',  end: destinationAddress });
 
   }
-
+  const setSection =(index)=>{
+    let newData=[...datas]
+    if(activeSections.length>0){
+      newData[activeSections[0]].color=''
+    }
+    if(index.length>0){
+      newData[index[0]].color='black'
+    }
+    setDatas(newData)
+    setActiveSections(index)
+  }
   const completeJob = async (id) => {
   setDatas(datas[activeSections[0]].ok= false);
       alert("Thank You!!");
@@ -72,7 +82,9 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
   };
   const acceptJob = async (id) => {
     alert ("The job is accepted")
-    setDatas(datas[activeSections[0]].ok=true);
+    const newData=[...datas]
+    newData[activeSections[0]].ok=true
+    setDatas(newData);
     // console.log("Accept "+ global.deneme);
     // try {
     //   const response = await fetch(`${backendUrl}/swabJobs/accept`, {
@@ -100,15 +112,23 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
     // }
   }
   _renderHeader = section => {
+    let color=section.color
+    if(!color){
+      if(section.ok){
+        color='green'
+      }else{
+        color="#FA1300"
+      }
+    }
     return (
       <View style={styles.button}>
         <Text style={styles.text}>
           {section.firstname} {section.lastname}
         </Text>
         {section.ok ? (
-          <FontAwesome name="check" size={25} color="green" />
+          <FontAwesome name="check" size={25} color={color} />
         ) : (
-          <FontAwesome name="flag-checkered" size={25} color="red" />
+          <FontAwesome name="flag-checkered" size={25} color={color} />
         )}
       </View>
     );
@@ -157,7 +177,7 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
           renderContent={_renderContent}
           sectionContainerStyle={styles.section}
           onChange={index => {
-            setActiveSections(index);
+            setSection(index);
           }}
         />
       </ScrollView>
