@@ -8,8 +8,6 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
-import { CounterComponent } from './components/counter/counter.component';
-import { FetchDataComponent } from './components/fetch-data/fetch-data.component';
 import { AppRouting } from './app.routing';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CustomAngularMaterialModule } from './modules/custom-angular-material/custom-angular-material.module';
@@ -20,8 +18,6 @@ import { UserSignupConfirmationComponent } from './components/user-signup-confir
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ResetPasswordComponent,
     UserSignupConfirmationComponent
   ],
