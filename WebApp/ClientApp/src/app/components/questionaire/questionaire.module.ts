@@ -19,6 +19,9 @@ import { ItemCouchComponent } from './item-couch/item-couch.component';
 import { ItemSnuffComponent } from './item-snuff/item-snuff.component';
 import { ItemDiarrhoeaComponent } from './item-diarrhoea/item-diarrhoea.component';
 import { ItemSoreThroatComponent } from './item-sore-throat/item-sore-throat.component';
+import { PatientSignupComponent } from './patient-signup/patient-signup.component';
+import { QustionaireSummaryComponent } from './qustionaire-summary/qustionaire-summary.component';
+import { QuestionaireStateService } from 'src/app/services/questionaire-state.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { ItemSoreThroatComponent } from './item-sore-throat/item-sore-throat.com
     ItemCouchComponent,
     ItemSnuffComponent,
     ItemDiarrhoeaComponent,
-    ItemSoreThroatComponent
+    ItemSoreThroatComponent,
+    PatientSignupComponent,
+    QustionaireSummaryComponent
   ],
   imports: [
     RouterModule.forChild([
@@ -46,9 +51,20 @@ import { ItemSoreThroatComponent } from './item-sore-throat/item-sore-throat.com
         path: '',
         component: QuestionaireComponent
       },
+      {
+        path: 'summary',
+        component: QustionaireSummaryComponent
+      },
+      {
+        path: 'signup',
+        component: PatientSignupComponent
+      },
     ]),
     CommonModule,
-    FormsModule
-  ]
+    FormsModule,
+  ],
+  providers: [
+    QuestionaireStateService
+  ],
 })
 export class QuestionaireModule { }

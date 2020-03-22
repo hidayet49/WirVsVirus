@@ -58,11 +58,17 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="item < 15">
   <div class="col-md-2">
     <button class="btn btn-primary" (click)="back()">Zurück</button>
   </div>
   <div class="col-md-2">
     <button class="btn btn-primary" (click)="next()">Weiter</button>
+  </div>
+</div>
+
+<div class="row" *ngIf="item === 15">
+  <div class="col-md-2">
+    <button class="btn btn-warning" (click)="submit()">Senden</button>
   </div>
 </div>
