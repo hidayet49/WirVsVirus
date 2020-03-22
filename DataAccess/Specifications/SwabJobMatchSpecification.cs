@@ -26,10 +26,9 @@ namespace WeVsVirus.DataAccess.Specifications
 
         private void AddIncludes()
         {
-            // TODO uncomment when patientaccount is available
             AddInclude(jobMatch => jobMatch.SwabJob);
-            // AddInclude($"{nameof(SwabJobMatch.SwabJob)}.{nameof(SwabJob.PatientAccount)}");
-            // AddInclude($"{nameof(SwabJobMatch.SwabJob)}.{nameof(SwabJob.PatientAccount)}.{nameof(PatientAccount.Address)}");
+            AddInclude($"{nameof(SwabJobMatch.SwabJob)}.{nameof(SwabJob.PatientAccount)}");
+            AddInclude($"{nameof(SwabJobMatch.SwabJob)}.{nameof(SwabJob.PatientAccount)}.{nameof(PatientAccount.Address)}");
         }
     }
 }
