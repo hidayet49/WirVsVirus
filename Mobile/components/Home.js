@@ -4,93 +4,91 @@ import data from "../data";
 import Accordion from "react-native-collapsible/Accordion";
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
-import Map from './Map'
-import {backendUrl} from "../data";
+import Map from "./Map";
+import { backendUrl } from "../data";
 
-export default function Home(navigation,route) {
-
+export default function Home(navigation, route) {
   const [activeSections, setActiveSections] = React.useState([]);
 
   const [datas, setDatas] = React.useState([]);
-  
 
-
-  const completeJob = async (id) => {
-     try {
-      const response = await fetch(`${backendUrl}/swabjob/complete`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${global.theToken}`
-        },
-        body: JSON.stringify({
-          jobId: id
-        }),
-      });
-      const {error} = response.json();
-      alert(error)
-    } catch (e) {
-      console.log(e);
-      alert(e)
-
-    }
+  const goToMap = (streetAndNumber, zipCode, city) => {};
+  const completeJob = async id => {
+    data[id].ok = false;
+    alert("Thank You!!");
+    //  try {
+    //   const response = await fetch(`${backendUrl}/swabjob/complete`, {
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${global.theToken}`
+    //     },
+    //     body: JSON.stringify({
+    //       jobId: id
+    //     }),
+    //   });
+    //   const {error} = response.json();
+    //   alert(error)
+    // } catch (e) {
+    //   console.log(e);
+    //   alert(e)
   };
-  const getJobs = async () => {
- 
-    try {
-      const response = await fetch(`${backendUrl}/swabJobs/forMe`, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${global.theToken}`
-        }
-      });
-      if(response.ok){
-        const datas = response.json();
-        if(datas.length==0){
-          alert("No avaliable Jobs..")
-        }else{
-          sent(datas)
-        }
-      }else{
-        const {error}=response.json()
-        alert(error)
+}
+const getJobs = async () => {
+  try {
+    const response = await fetch(`${backendUrl}/swabJobs/forMe`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${global.theToken}`
       }
-      
-    } catch (e) {
-      console.log(e);
-      alert(e)
-    }
-  };
-  const acceptJob = async (id) => {
-    console.log("Accept "+ global.deneme);
-    try {
-      const response = await fetch(`${backendUrl}/swabJobs/accept`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${global.theToken}`
-        },
-        body: JSON.stringify({
-          jobId: id
-        }),
-      });
-      if(response.ok){
-        alert("The job is accepted succesfully..")
-      }else{
-        const {error}=response.json()
-        alert(error)
+    });
+    if (response.ok) {
+      const datas = response.json();
+      if (datas.length == 0) {
+        alert("No avaliable Jobs..");
+      } else {
+        sent(datas);
       }
-      
-    } catch (e) {
-      console.log(e);
-      alert("accept"+e)
-
+    } else {
+      const { error } = response.json();
+      alert(error);
     }
+  } catch (e) {
+    console.log(e);
+    alert(e);
   }
+};
+const acceptJob = async id => {
+  alert("The job is accepted");
+  data[id].ok = true;
+  // console.log("Accept "+ global.deneme);
+  // try {
+  //   const response = await fetch(`${backendUrl}/swabJobs/accept`, {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${global.theToken}`
+  //     },
+  //     body: JSON.stringify({
+  //       jobId: id
+  //     }),
+  //   });
+  //   if(response.ok){
+  //     alert("The job is accepted succesfully..")
+  //   }else{
+  //     const {error}=response.json()
+  //     alert(error)
+  //   }
+
+  // } catch (e) {
+  //   console.log(e);
+  //   alert("accept"+e)
+
+  // }
   _renderHeader = section => {
     return (
       <View style={styles.button}>
@@ -113,32 +111,49 @@ export default function Home(navigation,route) {
         <Text style={styles.text}> PLZ : {section.zipCode}</Text>
         <Text style={styles.text}> STADT : {section.city}</Text>
         {!section.ok ? (
-          <Button buttonStyle={{ padding: 14 }} title="Get Job" onPress={()=>acceptJob(section.id)} />
+          <Button
+            buttonStyle={{ padding: 14 }}
+            title="Get Job"
+            onPress={() => acceptJob(section.id)}
+          />
         ) : (
-          <Button buttonStyle={{ padding: 14 }} title="I complete job" onPress={()=>completeJob(section.id)} />
+          <View>
+            <Button
+              buttonStyle={{ margin: 5, padding: 14 }}
+              title="Go to Maps"
+              onPress={() =>
+                goToMap(section.streetAndNumber, section.zipCode, section.city)
+              }
+            />
+            <Button
+              buttonStyle={{ padding: 14 }}
+              title="I complete job"
+              onPress={() => completeJob(section.id)}
+            />
+          </View>
         )}
       </View>
     );
   };
 
   return (
-    <View style ={{flex: 1}}>
-      <Map style ={{flex: 0.7}}></Map>
-    <ScrollView style={{flex:0.3}}>
-      <Accordion
-        sections={data}
-        activeSections={activeSections}
-        renderHeader={_renderHeader}
-        renderContent={_renderContent}
-        sectionContainerStyle={styles.section}
-        onChange={index => {
-          setActiveSections(index);
-        }}
-      />
-    </ScrollView>
+    <View style={{ flex: 1 }}>
+      <Map style={{ flex: 0.7 }}></Map>
+      <ScrollView style={{ flex: 0.3 }}>
+        <Accordion
+          sections={data}
+          activeSections={activeSections}
+          renderHeader={_renderHeader}
+          renderContent={_renderContent}
+          sectionContainerStyle={styles.section}
+          onChange={index => {
+            setActiveSections(index);
+          }}
+        />
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
