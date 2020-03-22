@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace WeVsVirus.Business.ViewModels
 {
-    public class SignUpViewModel
+    public class SignUpMedicalInstituteViewModel: ISignUpViewModel
     {
-        [Required(ErrorMessage = "Vorname fehlt")]
-        public string Firstname { get; set; }
-        [Required(ErrorMessage = "Nachname fehlt")]
-        public string Lastname { get; set; }
+        [Required(ErrorMessage = "Institutname fehlt")]
+        public string MedicalInstituteName { get; set; }
 
         [Required(ErrorMessage = "E-Mail-Adresse fehlt")]
         [EmailAddress]

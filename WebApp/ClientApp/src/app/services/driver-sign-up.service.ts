@@ -5,14 +5,10 @@ import { ResetPassword } from '../models/reset-password.model';
 import { AbstractHttpService } from './abstract-http.service';
 
 @Injectable({ providedIn: 'root' })
-export class SignUpService extends AbstractHttpService {
+export class DriverSignUpService extends AbstractHttpService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    super(baseUrl + 'api/account');
-  }
-
-  confirmEmail(userId: string, token: string) {
-    return this.http.get<any>(`${this.baseUrl}/confirmemail?userId=${userId}&token=${token}`);
+    super(baseUrl + 'api/driveraccount');
   }
 
   resetPassword(model: ResetPassword) {

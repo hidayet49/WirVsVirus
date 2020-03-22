@@ -11,6 +11,7 @@ using WeVsVirus.DataAccess.Repositories;
 using WeVsVirus.Business.Exceptions;
 using WeVsVirus.Business.ViewModels;
 using WeVsVirus.Business.Services;
+using WeVsVirus.Business.Services.EmailServices;
 
 namespace WeVsVirus.WebApp.Api
 {

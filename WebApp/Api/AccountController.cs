@@ -41,7 +41,7 @@ namespace WeVsVirus.WebApp.Api
                 {
                     throw;
                 }
-                catch(Exception e)
+                catch
                 {
                     throw new InternalServerErrorHttpException("Interner Serverfehler beim Einloggen.");
                 }

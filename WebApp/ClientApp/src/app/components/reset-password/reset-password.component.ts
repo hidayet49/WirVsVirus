@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResetPassword } from 'src/app/models/reset-password.model';
 import { AlertService } from 'src/app/services/alert.service';
-import { SignUpService } from 'src/app/services/sign-up.service';
+import { DriverSignUpService } from 'src/app/services/driver-sign-up.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,7 +16,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   text: string;
 
   constructor(private route: ActivatedRoute,
-    private signUpService: SignUpService,
+    private signUpService: DriverSignUpService,
     private alertService: AlertService,
     private router: Router) { }
 

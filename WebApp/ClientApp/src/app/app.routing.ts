@@ -13,6 +13,10 @@ const appRoutes: Routes = [
   {
     path: 'questionaire',
     loadChildren: () => import('./components/questionaire/questionaire.module').then(m => m.QuestionaireModule)
+  },
+  {
+    path: 'medical-institute',
+    loadChildren: () => import('./modules/medical-institute/medical-institute.module').then(m => m.MedicalInstituteModule)
   }
 ];
 
