@@ -2,7 +2,6 @@ import React from "react";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { Input } from "react-native-elements";
-import { TextWithIcon } from "./textWithIcon";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -11,7 +10,20 @@ function SignIn({ navigation }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [token, setToken] = React.useState("")
+  React.useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+    const bootstrapAsync = async () => {
+      let userToken;
+      try {
+        userToken = await SecureStore.getItemAsync("userToken");
+        setToken(userToken);
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
+    bootstrapAsync();
+  }, []);
   const signIn = async () => {
     try {
       const response = await fetch('https://localhost:5001/api/account/auth', {
@@ -33,7 +45,7 @@ function SignIn({ navigation }) {
         setToken(myToken)
         SecureStore.setItemAsync("userToken", myToken);
         alert(token)
-        navigation.navigate('Home', { token: token });
+        navigation.navigate('Home', { myToken: myToken });
       }
     } catch (e) {
       console.log(e);
