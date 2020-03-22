@@ -3,4 +3,6 @@ export interface Address {
   streetAndNumber?: string;
   zipCode?: string;
   city?: string;
+  lng?: number;
+  lat?: number;
 }

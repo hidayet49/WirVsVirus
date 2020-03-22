@@ -22,10 +22,5 @@ namespace WeVsVirus.Business.Services.EmailServices
         protected IEmailService EmailService { get; }
         protected EmailTemplateIdsConfiguration EmailTemplateIds { get; }
         protected FrontendConfiguration FrontendConfiguration { get; }
-        protected static void SetReceiver(AppUser user, out string receiverEmail, out string receiverName)
-        {
-            receiverEmail = user.Email;
-            receiverName = $"{user.Firstname} {user.Lastname}";
-        }
     }
 }

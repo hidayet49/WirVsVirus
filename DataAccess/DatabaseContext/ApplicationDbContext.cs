@@ -32,5 +32,8 @@ namespace WeVsVirus.DataAccess.DatabaseContext
         }
 
         public DbSet<DriverAccount> DriverAccounts { get; set; }
+        public DbSet<MedicalInstituteAccount> MedicalInstituteAccounts { get; set; }
+        public DbSet<PatientAccount> PatientAccounts { get; set; }
+        public DbSet<Address> Addresses { get; set; }
     }
 }

@@ -22,6 +22,7 @@ using WeVsVirus.DataAccess.DatabaseContext;
 using WeVsVirus.DataAccess;
 using WeVsVirus.Business.Services;
 using WeVsVirus.Business.Services.EmailServices;
+using WeVsVirus.Business.Services.GeoServices;
 
 namespace WeVsVirus.WebApp
 {
@@ -252,9 +253,14 @@ namespace WeVsVirus.WebApp
         {
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IDriverAccountService, DriverAccountService>();
+            services.AddTransient<IMedicalInstituteAccountService, MedicalInstituteAccountService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IWeVsVirusEmailService, WeVsVirusEmailService>();
             services.AddTransient<IAccountEmailService, AccountEmailService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<IGeoLocationService, GeoLocationService>();
+            services.AddTransient<TomTomApiService>();
+            services.AddTransient<GoogleMapsApiService>();
         }
 
         private void BindConfigurationVariables(IServiceCollection services)

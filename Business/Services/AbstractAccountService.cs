@@ -10,60 +10,59 @@ using WeVsVirus.Models.Entities;
 using WeVsVirus.DataAccess;
 using WeVsVirus.Business.Utility;
 using WeVsVirus.Business.Exceptions;
-using WeVsVirus.Business.Services.EmailServices;
+using NetTopologySuite.Geometries;
+using NetTopologySuite;
 
 namespace WeVsVirus.Business.Services
 {
-    public interface IDriverAccountService
+    public interface IAccountService
     {
-        Task<DriverAccount> CreateNewUserAsync(SignUpDriverViewModel model);
+        (IAccount Account, string AccessRole) ConvertToAccount(ISignUpViewModel model);
+        Task<IAccount> CreateNewUserAsync(IAccount account, string password, string accessRole);
     }
 
-    public class DriverAccountService : IDriverAccountService
+    public abstract class AbstractAccountService : IAccountService
     {
-        public DriverAccountService(
+        public AbstractAccountService(
             UserManager<AppUser> userManager,
             IMapper mapper,
-            IUnitOfWork unitOfWork,
-            IAccountEmailService accountEmailService)
+            IUnitOfWork unitOfWork)
         {
             UnitOfWork = unitOfWork;
             UserManager = userManager;
             Mapper = mapper;
-            AccountEmailService = accountEmailService;
         }
-        private UserManager<AppUser> UserManager { get; }
-        private IUnitOfWork UnitOfWork { get; }
-        private IMapper Mapper { get; }
-        private IAccountEmailService AccountEmailService { get; }
+        protected UserManager<AppUser> UserManager { get; }
+        protected IUnitOfWork UnitOfWork { get; }
+        protected IMapper Mapper { get; }
 
-        public async Task<DriverAccount> CreateNewUserAsync(SignUpDriverViewModel model)
+        public abstract (IAccount Account, string AccessRole) ConvertToAccount(ISignUpViewModel model);
+        protected abstract Task CreateAccountAsync(IAccount account);
+
+        public virtual async Task<IAccount> CreateNewUserAsync(IAccount account, string password, string accessRole)
         {
-            var driverAccount = Mapper.Map<DriverAccount>(model);
-            driverAccount.AppUser.EmailConfirmed = true;
             // Need to wrap this in transaction since UserManager is not working properly
             // when AutoSaveChanges=false and called two times (AppUser and Role)
             // => results in foreign key constraint error for Account
             using (var transaction = UnitOfWork.DbContext.Database.BeginTransaction())
             {
-                // TODO create random password
-                var result = await UserManager.CreateAsync(driverAccount.AppUser, "RANDOMINITIALPASSWORD");
+                var result = await UserManager.CreateAsync(account.AppUser, password);
                 await UnitOfWork.CompleteAsync();
                 if (result.Succeeded)
                 {
-                    driverAccount.AppUserId = driverAccount.AppUser.Id;
-                    driverAccount = await UnitOfWork.Repository<DriverAccount>().AddAsync(driverAccount);
-                    result = await UserManager.AddToRoleAsync(driverAccount.AppUser, AccessRoles.DriverUser);
+                    var address = UnitOfWork.Repository<Address>().AddAsync(account.Address);
+                    account.AppUserId = account.AppUser.Id;
+                    account.AddressId = address.Id;
+                    await CreateAccountAsync(account);
+                    result = await UserManager.AddToRoleAsync(account.AppUser, accessRole);
                     await UnitOfWork.CompleteAsync();
                     if (result.Succeeded)
                     {
                         try
                         {
-                            // TODO Send email with token to driver
-                            await AccountEmailService.SendDriverSignUpMailAsync(driverAccount);
                             await UnitOfWork.CompleteAsync();
                             await transaction.CommitAsync();
-                            return driverAccount;
+                            return account;
                         }
                         catch
                         {
@@ -80,6 +79,11 @@ namespace WeVsVirus.Business.Services
                     throw new CreateNewUserException(result.Errors.FirstOrDefault()?.Description);
                 }
             }
+        }
+
+        protected static GeometryFactory GetGeometryFactory()
+        {
+            return NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
         }
     }
 }
