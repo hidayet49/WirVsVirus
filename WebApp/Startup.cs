@@ -257,6 +257,7 @@ namespace WeVsVirus.WebApp
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IWeVsVirusEmailService, WeVsVirusEmailService>();
             services.AddTransient<IAccountEmailService, AccountEmailService>();
+            services.AddTransient<ISwabJobMatchService, SwabJobMatchService>();
             services.AddTransient<IAddressService, AddressService>();
             services.AddTransient<IGeoLocationService, GeoLocationService>();
             services.AddTransient<TomTomApiService>();

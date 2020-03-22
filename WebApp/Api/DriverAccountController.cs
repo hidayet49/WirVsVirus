@@ -12,6 +12,7 @@ using WeVsVirus.Business.Exceptions;
 using WeVsVirus.Business.ViewModels;
 using WeVsVirus.Business.Services;
 using WeVsVirus.Business.Services.EmailServices;
+using WeVsVirus.Business.Utility;
 
 namespace WeVsVirus.WebApp.Api
 {
@@ -27,9 +28,7 @@ namespace WeVsVirus.WebApp.Api
         private IDriverAccountService DriverAccountService { get; }
 
         [HttpPost("[action]")]
-        // TODO only allow for health officess when health office sign up implementation is ready
-        // [Authorize(Policy = PolicyNames.HealthOfficeUserPolicy)]
-        [AllowAnonymous]
+        [Authorize(Policy = PolicyNames.HealthOfficeUserPolicy)]
         public virtual async Task<IActionResult> NewUser([FromBody] SignUpDriverViewModel model)
         {
             if (ModelState.IsValid)
