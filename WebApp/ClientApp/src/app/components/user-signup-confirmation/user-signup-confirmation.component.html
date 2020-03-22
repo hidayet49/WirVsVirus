@@ -1,1 +1,4 @@
-<p>user-signup-confirmation works!</p>
+<h2 *ngIf="!error && !isRequesting">Vielen Dank</h2>
+<h2 *ngIf="error">Oups</h2>
+
+<p>{{message}}</p>

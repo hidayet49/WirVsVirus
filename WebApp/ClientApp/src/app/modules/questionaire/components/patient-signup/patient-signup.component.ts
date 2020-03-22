@@ -27,7 +27,7 @@ export class PatientSignupComponent implements OnInit {
   ngOnInit() {
     this.questionaire = this.questionaireStateService.questionaire;
     if (!this.questionaire || this.questionaire.ageCategory < 0) {
-      //this.router.navigate(['/questionaire']);
+      this.router.navigate(['/questionaire']);
     }
   }
 

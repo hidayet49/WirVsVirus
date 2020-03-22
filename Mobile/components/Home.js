@@ -8,40 +8,40 @@ import Map from './Map'
 import {backendUrl} from "../data";
 import createOpenLink from 'react-native-open-maps';
 
-export default function Home(navigation,route) {
-
+export default function Home(navigation, route) {
   const [activeSections, setActiveSections] = React.useState([]);
 
   const [datas, setDatas] = React.useState([]);
-  
 
-  const goToMap = (streetAndNumber,zipCode,city)=>{
+const goToMap = (streetAndNumber,zipCode,city)=>{
     const destinationAddress = streetAndNumber+ ','+ city+','+zipCode;
     createOpenLink({ travelType:'drive',  end: destinationAddress });
 
   }
-  const completeJob = async (id) => {
-   data[id].ok=false;
-    //  try {
-    //   const response = await fetch(`${backendUrl}/swabjob/complete`, {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json',
-    //       Authorization: `Bearer ${global.theToken}`
-    //     },
-    //     body: JSON.stringify({
-    //       jobId: id
-    //     }),
-    //   });
-    //   const {error} = response.json();
-    //   alert(error)
-    // } catch (e) {
-    //   console.log(e);
-    //   alert(e)
 
-    // }
-  };
+  const completeJob = async (id) => {
+  data[id].ok = false;
+      alert("Thank You!!");
+       /*try {
+        const response = await fetch(`${backendUrl}/swabjob/complete`, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${global.theToken}`
+          },
+          body: JSON.stringify({
+            jobId: id
+          }),
+        });
+        const {error} = response.json();
+        alert(error)
+      } catch (e) {
+        console.log(e);
+        alert(e)
+
+      }*/
+    };
   const getJobs = async () => {
  
     try {
@@ -92,7 +92,7 @@ export default function Home(navigation,route) {
     //     const {error}=response.json()
     //     alert(error)
     //   }
-      
+
     // } catch (e) {
     //   console.log(e);
     //   alert("accept"+e)
@@ -121,11 +121,25 @@ export default function Home(navigation,route) {
         <Text style={styles.text}> PLZ : {section.zipCode}</Text>
         <Text style={styles.text}> STADT : {section.city}</Text>
         {!section.ok ? (
-          <Button buttonStyle={{ padding: 14 }} title="Get Job" onPress={()=>acceptJob(section.id)} />
+          <Button
+            buttonStyle={{ padding: 14 }}
+            title="Get Job"
+            onPress={() => acceptJob(section.id)}
+          />
         ) : (
           <View>
-          <Button buttonStyle={{ margin:5,padding: 14 }} title=" Go To Map" onPress={()=>goToMap(section.streetAndNumber,section.zipCode,section.city)} />
-          <Button buttonStyle={{ padding: 14 }} title="I complete job" onPress={()=>completeJob(section.id)} />
+            <Button
+              buttonStyle={{ margin: 5, padding: 14 }}
+              title="Go to Maps"
+              onPress={() =>
+                goToMap(section.streetAndNumber, section.zipCode, section.city)
+              }
+            />
+            <Button
+              buttonStyle={{ padding: 14 }}
+              title="I complete job"
+              onPress={() => completeJob(section.id)}
+            />
           </View>
         )}
       </View>
@@ -133,23 +147,23 @@ export default function Home(navigation,route) {
   };
 
   return (
-    <View style ={{flex: 1}}>
-      <Map style ={{flex: 0.7}}></Map>
-    <ScrollView style={{flex:0.3}}>
-      <Accordion
-        sections={data}
-        activeSections={activeSections}
-        renderHeader={_renderHeader}
-        renderContent={_renderContent}
-        sectionContainerStyle={styles.section}
-        onChange={index => {
-          setActiveSections(index);
-        }}
-      />
-    </ScrollView>
+    <View style={{ flex: 1 }}>
+      <Map style={{ flex: 0.7 }}></Map>
+      <ScrollView style={{ flex: 0.3 }}>
+        <Accordion
+          sections={data}
+          activeSections={activeSections}
+          renderHeader={_renderHeader}
+          renderContent={_renderContent}
+          sectionContainerStyle={styles.section}
+          onChange={index => {
+            setActiveSections(index);
+          }}
+        />
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
