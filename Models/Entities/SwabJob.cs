@@ -15,10 +15,8 @@ namespace WeVsVirus.Models.Entities
 
         public SwabJobState State { get; set; }
         
-        // TODO uncomment this and migrate
-
-        // public PatientAccount PatientAccount { get; set; }
-        // public int PatientAccountId { get; set; }
+        public PatientAccount PatientAccount { get; set; }
+        public int PatientAccountId { get; set; }
         public int? DriverAccountId { get; set; }
         public DriverAccount DriverAccount { get; set; }
         public ICollection<SwabJobMatch> SwabJobMatches { get; set; } = new List<SwabJobMatch>();

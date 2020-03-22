@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using WeVsVirus.DataAccess.DatabaseContext;
@@ -10,9 +11,10 @@ using WeVsVirus.DataAccess.DatabaseContext;
 namespace WeVsVirus.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200322124615_TypoCorrected")]
+    partial class TypoCorrected
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -327,50 +329,6 @@ namespace WeVsVirus.DataAccess.Migrations
                     b.ToTable("PatientAccounts");
                 });
 
-            modelBuilder.Entity("WeVsVirus.Models.Entities.SwabJob", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
-
-                    b.Property<DateTimeOffset?>("CompletionTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("CreationTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("DriverAccountId")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DriverAccountId");
-
-                    b.ToTable("SwabJob");
-                });
-
-            modelBuilder.Entity("WeVsVirus.Models.Entities.SwabJobMatch", b =>
-                {
-                    b.Property<int>("SwabJobId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DriverAccountId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset>("MatchTimeStamp")
-                        .HasColumnType("datetimeoffset");
-
-                    b.HasKey("SwabJobId", "DriverAccountId");
-
-                    b.HasIndex("DriverAccountId");
-
-                    b.ToTable("SwabJobMatch");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -453,28 +411,6 @@ namespace WeVsVirus.DataAccess.Migrations
                     b.HasOne("WeVsVirus.Models.Entities.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId");
-                });
-
-            modelBuilder.Entity("WeVsVirus.Models.Entities.SwabJob", b =>
-                {
-                    b.HasOne("WeVsVirus.Models.Entities.DriverAccount", "DriverAccount")
-                        .WithMany("SwabJobs")
-                        .HasForeignKey("DriverAccountId");
-                });
-
-            modelBuilder.Entity("WeVsVirus.Models.Entities.SwabJobMatch", b =>
-                {
-                    b.HasOne("WeVsVirus.Models.Entities.DriverAccount", "DriverAccount")
-                        .WithMany("SwabJobMatches")
-                        .HasForeignKey("DriverAccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("WeVsVirus.Models.Entities.SwabJob", "SwabJob")
-                        .WithMany("SwabJobMatches")
-                        .HasForeignKey("SwabJobId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

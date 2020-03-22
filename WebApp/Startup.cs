@@ -254,6 +254,7 @@ namespace WeVsVirus.WebApp
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IDriverAccountService, DriverAccountService>();
             services.AddTransient<IMedicalInstituteAccountService, MedicalInstituteAccountService>();
+            services.AddTransient<IPatientAccountService, PatientAccountService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IWeVsVirusEmailService, WeVsVirusEmailService>();
             services.AddTransient<IAccountEmailService, AccountEmailService>();

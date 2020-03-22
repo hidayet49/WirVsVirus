@@ -12,7 +12,7 @@ const appRoutes: Routes = [
   { path: 'driver-signup-confirmation', component: ResetPasswordComponent },
   {
     path: 'questionaire',
-    loadChildren: () => import('./components/questionaire/questionaire.module').then(m => m.QuestionaireModule)
+    loadChildren: () => import('./modules/questionaire/questionaire.module').then(m => m.QuestionaireModule)
   },
   {
     path: 'medical-institute',

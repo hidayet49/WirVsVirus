@@ -37,15 +37,21 @@ namespace WeVsVirus.Business.Mappers
             CreateMap<SwabJobMatch, SwabJobMatchViewModel>()
             // TODO uncomment
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.SwabJob.Id))
-            // .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Firstname))
-            // .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Firstname))
-            // .ForMember(dest => dest.Lastname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Lastname))
-            // .ForMember(dest => dest.StreetAndNumber, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.StreetAndNumber))
-            // .ForMember(dest => dest.ZipCode, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.ZipCode))
-            // .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.City))
-            // .ForMember(dest => dest.Lng, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.GeoLocation.Coordinate.X))
-            // .ForMember(dest => dest.Lat, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.GeoLocation.Coordinate.Y))
+            .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Firstname))
+            .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Firstname))
+            .ForMember(dest => dest.Lastname, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Lastname))
+            .ForMember(dest => dest.StreetAndNumber, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.StreetAndNumber))
+            .ForMember(dest => dest.ZipCode, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.ZipCode))
+            .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.City))
+            .ForMember(dest => dest.Lng, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.GeoLocation.Coordinate.X))
+            .ForMember(dest => dest.Lat, opt => opt.MapFrom(src => src.SwabJob.PatientAccount.Address.GeoLocation.Coordinate.Y))
             ;
+            CreateMap<SignUpPatientViewModel, PatientAccount>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => new AppUser
+                {
+                    Email = src.Email,
+                    UserName = src.Email
+                }));
         }
     }
 }
