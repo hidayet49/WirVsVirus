@@ -122,3 +122,6 @@ const data = [
       }
 ];
 export default data;
+
+export const backendUrl = 'https://c19test.azurewebsites.net/api'
+// export const backendUrl = 'https://localhost:5001/api'

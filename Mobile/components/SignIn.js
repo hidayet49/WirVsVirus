@@ -5,6 +5,7 @@ import { Input } from "react-native-elements";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import * as SecureStore from "expo-secure-store";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import {backendUrl} from "../data";
 
 function SignIn({ navigation }) {
   const [username, setUsername] = React.useState("");
@@ -26,7 +27,7 @@ function SignIn({ navigation }) {
   }, []);
   const signIn = async () => {
     try {
-      const response = await fetch('https://localhost:5001/api/account/auth', {
+      const response = await fetch(`${backendUrl}/account/auth`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
