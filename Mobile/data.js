@@ -23,8 +23,8 @@ const data = [
   },
   {
     id:4,
-    firstname: "<firstname>",
-    lastname: "<lastname>",
+    firstname: "Clara",
+    lastname: "Johnes",
     streetAndNumber: "Martin-Ludwig-Straße 17",
     zipCode: "85080",
     city: "Gaimersheim",
