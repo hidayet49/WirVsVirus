@@ -14,27 +14,31 @@ export default function Home(navigation,route) {
   const [datas, setDatas] = React.useState([]);
   
 
+  const goToMap = (streetAndNumber,zipCode,city)=>{
 
+
+  }
   const completeJob = async (id) => {
-     try {
-      const response = await fetch(`${backendUrl}/swabjob/complete`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${global.theToken}`
-        },
-        body: JSON.stringify({
-          jobId: id
-        }),
-      });
-      const {error} = response.json();
-      alert(error)
-    } catch (e) {
-      console.log(e);
-      alert(e)
+   data[id].ok=false;
+    //  try {
+    //   const response = await fetch(`${backendUrl}/swabjob/complete`, {
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${global.theToken}`
+    //     },
+    //     body: JSON.stringify({
+    //       jobId: id
+    //     }),
+    //   });
+    //   const {error} = response.json();
+    //   alert(error)
+    // } catch (e) {
+    //   console.log(e);
+    //   alert(e)
 
-    }
+    // }
   };
   const getJobs = async () => {
  
@@ -65,31 +69,33 @@ export default function Home(navigation,route) {
     }
   };
   const acceptJob = async (id) => {
-    console.log("Accept "+ global.deneme);
-    try {
-      const response = await fetch(`${backendUrl}/swabJobs/accept`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${global.theToken}`
-        },
-        body: JSON.stringify({
-          jobId: id
-        }),
-      });
-      if(response.ok){
-        alert("The job is accepted succesfully..")
-      }else{
-        const {error}=response.json()
-        alert(error)
-      }
+    alert ("The job is accepted")
+    data[id].ok=true;
+    // console.log("Accept "+ global.deneme);
+    // try {
+    //   const response = await fetch(`${backendUrl}/swabJobs/accept`, {
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/json',
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${global.theToken}`
+    //     },
+    //     body: JSON.stringify({
+    //       jobId: id
+    //     }),
+    //   });
+    //   if(response.ok){
+    //     alert("The job is accepted succesfully..")
+    //   }else{
+    //     const {error}=response.json()
+    //     alert(error)
+    //   }
       
-    } catch (e) {
-      console.log(e);
-      alert("accept"+e)
+    // } catch (e) {
+    //   console.log(e);
+    //   alert("accept"+e)
 
-    }
+    // }
   }
   _renderHeader = section => {
     return (
@@ -115,6 +121,7 @@ export default function Home(navigation,route) {
         {!section.ok ? (
           <Button buttonStyle={{ padding: 14 }} title="Get Job" onPress={()=>acceptJob(section.id)} />
         ) : (
+          <Button buttonStyle={{ margin:5,padding: 14 }} title="I complete job" onPress={()=>goToMap(section.streetAndNumber,section.zipCode,section.city)} />
           <Button buttonStyle={{ padding: 14 }} title="I complete job" onPress={()=>completeJob(section.id)} />
         )}
       </View>

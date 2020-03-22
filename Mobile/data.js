@@ -8,7 +8,7 @@ const data = [
     city: "city",
     lat: 0,
     long: 0,
-    ok:true
+    ok:false
   },
   {
     id:3,
@@ -30,7 +30,7 @@ const data = [
     city: "city",
     lat: 0,
     long: 0,
-    ok:true
+    ok:false
   },
   {
     id:5,
@@ -63,7 +63,7 @@ const data = [
       city: "city",
       lat: 0,
       long: 0,
-      ok:true
+      ok:false
     },
     {
       id:3,
@@ -85,7 +85,7 @@ const data = [
       city: "city",
       lat: 0,
       long: 0,
-      ok:true
+      ok:false
     },
     {
       id:5,

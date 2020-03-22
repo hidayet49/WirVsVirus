@@ -29,7 +29,7 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" headerMode = 'screen'>
-        {token ? (
+        {!token ? (
           <Stack.Screen name="SignIn" component={SignIn} options={ {headerShown: false}} />
         ) : (
           <>

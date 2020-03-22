@@ -25,30 +25,46 @@ function SignIn({ navigation }) {
 
     bootstrapAsync();
   }, []);
+  // const signIn = async () => {
+  //   try {
+  //     const response = await fetch(`${backendUrl}/account/auth`, {
+  //       method: 'POST',
+  //       headers: {
+  //         Accept: 'application/json',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         email: username,
+  //         password: password,
+  //       }),
+  //     });
+      
+      
+  //     const {myToken}=await response.json();
+      
+  //     if(myToken){
+  //       setToken(myToken)
+  //       SecureStore.setItemAsync("userToken", myToken);
+  //       alert(token)
+  //       navigation.navigate('Home', { myToken: myToken });
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //     alert(e)
+
+  //   }
+  // };
+
+  //Mockup
   const signIn = async () => {
     try {
-      const response = await fetch(`${backendUrl}/account/auth`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: username,
-          password: password,
-        }),
-      });
-      
-      
-      const {myToken}=await response.json();
-      
-      if(myToken){
+      const myToken="HelloSecret"
         setToken(myToken)
         SecureStore.setItemAsync("userToken", myToken);
-        alert(token)
+        alert("You are succesfully Login...")
         navigation.navigate('Home', { myToken: myToken });
       }
-    } catch (e) {
+     catch (e) {
       console.log(e);
       alert(e)
 
