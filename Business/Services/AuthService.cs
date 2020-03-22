@@ -18,7 +18,7 @@ namespace WeVsVirus.Business.Services
 {
     public interface IAuthService
     {
-        Task<string> LoginAsync(LoginViewModel loginViewModel);
+        Task<object> LoginAsync(LoginViewModel loginViewModel);
         Task ResetPasswordAsync(ResetPasswordViewModel model);
     }
     public class AuthService : IAuthService
@@ -49,7 +49,7 @@ namespace WeVsVirus.Business.Services
         private JwtIssuerOptions JwtOptions { get; }
         private ILogger<AuthService> Logger { get; }
 
-        public async Task<string> LoginAsync(LoginViewModel loginViewModel)
+        public async Task<object> LoginAsync(LoginViewModel loginViewModel)
         {
             var result = await SignInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: false);
             if (result.Succeeded)

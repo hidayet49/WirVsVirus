@@ -7,7 +7,7 @@ namespace WeVsVirus.Business.Utility
 {
     public class JwtTokens
     {
-        public static async Task<string> GenerateJwt(ClaimsIdentity identity, IJwtFactory jwtFactory, string userName, JwtIssuerOptions jwtOptions, JsonSerializerSettings serializerSettings)
+        public static async Task<object> GenerateJwt(ClaimsIdentity identity, IJwtFactory jwtFactory, string userName, JwtIssuerOptions jwtOptions, JsonSerializerSettings serializerSettings)
         {
             var id = identity.Claims.Single(c => c.Type == Constants.Strings.JwtClaimIdentifiers.Id).Value;
             var typeClaim = identity.Claims.FirstOrDefault(c => c.Type == Constants.Strings.JwtClaimIdentifiers.AccountType);
@@ -20,7 +20,8 @@ namespace WeVsVirus.Business.Utility
                     expires_in = (int)jwtOptions.ValidFor.TotalSeconds,
                     account_type = typeClaim.Value
                 };
-                return JsonConvert.SerializeObject(response, serializerSettings);
+                // return JsonConvert.SerializeObject(response, serializerSettings);
+                return response;
             }
             else{
                 var response = new
@@ -29,7 +30,8 @@ namespace WeVsVirus.Business.Utility
                     auth_token = await jwtFactory.GenerateEncodedToken(id, userName, identity),
                     expires_in = (int)jwtOptions.ValidFor.TotalSeconds
                 };
-                return JsonConvert.SerializeObject(response, serializerSettings);
+                return response;
+                // return JsonConvert.SerializeObject(response, serializerSettings);
             }
         }
     }

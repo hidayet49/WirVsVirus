@@ -1,0 +1,4 @@
+FROM boxfuse/flyway
+WORKDIR /
+COPY DataAccess/Migrations .
+ENTRYPOINT flyway migrate -user=SA -password=Test1234_1234 -url="jdbc:sqlserver://db1.internal.prod.example.com:1433;databaseName=master" -locations="filesystem:."

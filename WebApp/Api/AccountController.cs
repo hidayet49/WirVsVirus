@@ -34,7 +34,6 @@ namespace WeVsVirus.WebApp.Api
             {
                 try
                 {
-
                     var jwt = await AuthService.LoginAsync(model);
                     return Ok(jwt);
                 }
@@ -42,7 +41,7 @@ namespace WeVsVirus.WebApp.Api
                 {
                     throw;
                 }
-                catch
+                catch(Exception e)
                 {
                     throw new InternalServerErrorHttpException("Interner Serverfehler beim Einloggen.");
                 }

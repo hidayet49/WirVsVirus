@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using WeVsVirus.DataAccess.DatabaseContext;
 // using Microsoft.Extensions.Logging.ApplicationInsights;
 
 namespace WeVsVirus.WebApp
@@ -15,7 +17,7 @@ namespace WeVsVirus.WebApp
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-
+            
             host.Run();
         }
 
