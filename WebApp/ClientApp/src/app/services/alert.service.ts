@@ -32,8 +32,7 @@ export class AlertService {
       }
     });
   }
-  error(err: any, keepAfterNavigationChange = false) {
-    this.keepAfterNavigationChange = keepAfterNavigationChange;
+  error(err: any) {
     if (typeof (err) === 'string') {
       this.showError(err);
     } else {

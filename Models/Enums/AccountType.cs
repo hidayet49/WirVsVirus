@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
-namespace WeVsVirus.Models.Entities
+namespace WeVsVirus.Models.Enums
 {
     public enum AccountType
     {

@@ -11,12 +11,14 @@ using WeVsVirus.DataAccess;
 using WeVsVirus.Business.Utility;
 using WeVsVirus.Business.Exceptions;
 using WeVsVirus.Business.Services.EmailServices;
+using WeVsVirus.DataAccess.Specifications;
 
 namespace WeVsVirus.Business.Services
 {
     public interface IDriverAccountService
     {
         Task<DriverAccount> CreateNewUserAsync(SignUpDriverViewModel model);
+        Task<DriverAccount> GetAccountAsync(string userId);
     }
 
     public class DriverAccountService : IDriverAccountService
@@ -36,6 +38,16 @@ namespace WeVsVirus.Business.Services
         private IUnitOfWork UnitOfWork { get; }
         private IMapper Mapper { get; }
         private IAccountEmailService AccountEmailService { get; }
+
+        public async Task<DriverAccount> GetAccountAsync(string userId)
+        {
+            var account = await UnitOfWork.Repository<DriverAccount>().GetByAsync(new DriverAccountSpecification(userId));
+            if (account == null)
+            {
+                throw new NotFoundHttpException("User wurde nicht gefunden.");
+            }
+            return account;
+        }
 
         public async Task<DriverAccount> CreateNewUserAsync(SignUpDriverViewModel model)
         {

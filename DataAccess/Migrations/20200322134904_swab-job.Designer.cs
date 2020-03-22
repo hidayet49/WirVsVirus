@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using WeVsVirus.DataAccess.DatabaseContext;
@@ -10,9 +11,10 @@ using WeVsVirus.DataAccess.DatabaseContext;
 namespace WeVsVirus.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200322134904_swab-job")]
+    partial class swabjob
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,7 +305,10 @@ namespace WeVsVirus.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AdressId")
                         .HasColumnType("int");
 
                     b.Property<string>("AppUserId")
@@ -343,17 +348,12 @@ namespace WeVsVirus.DataAccess.Migrations
                     b.Property<int?>("DriverAccountId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientAccountId")
-                        .HasColumnType("int");
-
                     b.Property<byte>("State")
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DriverAccountId");
-
-                    b.HasIndex("PatientAccountId");
 
                     b.ToTable("SwabJob");
                 });
@@ -451,9 +451,7 @@ namespace WeVsVirus.DataAccess.Migrations
                 {
                     b.HasOne("WeVsVirus.Models.Entities.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("WeVsVirus.Models.Entities.AppUser", "AppUser")
                         .WithMany()
@@ -465,12 +463,6 @@ namespace WeVsVirus.DataAccess.Migrations
                     b.HasOne("WeVsVirus.Models.Entities.DriverAccount", "DriverAccount")
                         .WithMany("SwabJobs")
                         .HasForeignKey("DriverAccountId");
-
-                    b.HasOne("WeVsVirus.Models.Entities.PatientAccount", "PatientAccount")
-                        .WithMany()
-                        .HasForeignKey("PatientAccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("WeVsVirus.Models.Entities.SwabJobMatch", b =>
