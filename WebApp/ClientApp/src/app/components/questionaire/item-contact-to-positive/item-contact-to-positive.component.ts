@@ -1,16 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-item-heinsberg',
-  templateUrl: './item-heinsberg.component.html',
-  styleUrls: ['./item-heinsberg.component.css']
+  selector: 'app-item-contact-to-positive',
+  templateUrl: './item-contact-to-positive.component.html',
+  styleUrls: ['./item-contact-to-positive.component.css']
 })
-export class ItemHeinsbergComponent implements OnInit {
+export class ItemContactToPositiveComponent implements OnInit {
   @Input()
   public itemValue = -1;
 
   @Input()
-  public returnDate = '';
+  public text = '';
 
   @Output()
   public itemChanged = new EventEmitter<number>();
@@ -25,7 +25,7 @@ export class ItemHeinsbergComponent implements OnInit {
 
   onItemChange(id) {
     if (id === 2) {
-      this.returnDate = '';
+      this.text = '';
       this.textChanged.next('');
     }
     this.itemChanged.next(id);

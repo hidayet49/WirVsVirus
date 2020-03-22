@@ -1,0 +1,15 @@
+<h4> 26. Haben Sie Halsschmerzen?</h4>
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="option1" value="1"  [checked]="itemValue === 1" (change)="onItemChange(1)">
+  <label class="form-check-label" for="option1">
+    Ja
+  </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="option2" value="2" [checked]="itemValue === 2" (change)="onItemChange(2)">
+  <label class="form-check-label" for="option2">
+    Nein
+  </label>
+</div>

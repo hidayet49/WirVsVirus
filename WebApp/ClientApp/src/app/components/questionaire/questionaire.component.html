@@ -17,18 +17,58 @@
     <app-item-traveled *ngIf="item===4" [itemValue]="questionaire.traveled"
       (itemChanged)="questionaire.traveled = $event"></app-item-traveled>
 
-    <app-item-heinsberg *ngIf="item===5" [itemValue]="questionaire.heinsberg" (itemChanged)="questionaire.heinsberg = $event"
-      [returnDate]="questionaire.backFromHeinsberg" (textChanged)="questionaire.backFromHeinsberg = $event">
+    <app-item-heinsberg *ngIf="item===5" [itemValue]="questionaire.heinsberg"
+      (itemChanged)="questionaire.heinsberg = $event" [returnDate]="questionaire.backFromHeinsberg"
+      (textChanged)="questionaire.backFromHeinsberg = $event">
     </app-item-heinsberg>
+
+    <app-item-foreign-countries *ngIf="item===6" [itemValue]="questionaire.foreignCountries"
+      (itemChanged)="questionaire.foreignCountries = $event"></app-item-foreign-countries>
+
+    <app-item-contact-to-positive *ngIf="item===7" [itemValue]="questionaire.contactToPositives"
+      (itemChanged)="questionaire.contactToPositives = $event" [text]="questionaire.lastCcontactToPositives"
+      (textChanged)="questionaire.lastCcontactToPositives = $event"></app-item-contact-to-positive>
+
+    <app-item-fever *ngIf="item===8" [itemValue]="questionaire.fever" (itemChanged)="questionaire.fever = $event">
+    </app-item-fever>
+
+    <app-item-shiver *ngIf="item===9" [itemValue]="questionaire.shiver" (itemChanged)="questionaire.shiver = $event">
+    </app-item-shiver>
+
+    <app-item-defeated *ngIf="item===10" [itemValue]="questionaire.defeated"
+      (itemChanged)="questionaire.defeated = $event"></app-item-defeated>
+
+    <app-item-aching-limbs *ngIf="item===11" [itemValue]="questionaire.achingLimbs"
+      (itemChanged)="questionaire.achingLimbs = $event"></app-item-aching-limbs>
+
+    <app-item-couch *ngIf="item===12" [itemValue]="questionaire.cough" (itemChanged)="questionaire.cough = $event">
+    </app-item-couch>
+
+    <app-item-snuff *ngIf="item===13" [itemValue]="questionaire.snuff" (itemChanged)="questionaire.snuff= $event">
+    </app-item-snuff>
+
+    <app-item-diarrhoea *ngIf="item===14" [itemValue]="questionaire.diarrhoea"
+      (itemChanged)="questionaire.diarrhoea= $event">
+    </app-item-diarrhoea>
+
+    <app-item-sore-throat *ngIf="item===15" [itemValue]="questionaire.itemSoreThroat"
+      (itemChanged)="questionaire.itemSoreThroat= $event">
+    </app-item-sore-throat>
 
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="item < 15">
   <div class="col-md-2">
     <button class="btn btn-primary" (click)="back()">Zurück</button>
   </div>
   <div class="col-md-2">
     <button class="btn btn-primary" (click)="next()">Weiter</button>
+  </div>
+</div>
+
+<div class="row" *ngIf="item === 15">
+  <div class="col-md-2">
+    <button class="btn btn-warning" (click)="submit()">Senden</button>
   </div>
 </div>

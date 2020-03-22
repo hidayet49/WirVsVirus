@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Questionaire } from 'src/app/models/questionaire';
+import { Router } from '@angular/router';
+import { QuestionaireStateService } from 'src/app/services/questionaire-state.service';
 
 @Component({
   selector: 'app-questionaire',
@@ -9,10 +11,14 @@ import { Questionaire } from 'src/app/models/questionaire';
 export class QuestionaireComponent implements OnInit {
 
   public item = 0;
-  public questionaire = new Questionaire();
-  private itemCount = 36;
+  public questionaire: Questionaire;
+  private itemCount = 15;
 
-  constructor() { }
+  constructor(private router: Router,
+    private questionaireStateService: QuestionaireStateService) {
+      this.questionaireStateService.questionaire = new Questionaire();
+      this.questionaire = this.questionaireStateService.questionaire;
+     }
 
   ngOnInit() {
   }
@@ -29,5 +35,9 @@ export class QuestionaireComponent implements OnInit {
     if (this.item < 0) {
       this.item = 0;
     }
+  }
+
+  submit() {
+    this.router.navigate(['/questionaire/summary']);
   }
 }
