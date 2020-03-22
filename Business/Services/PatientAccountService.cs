@@ -10,7 +10,10 @@ using WeVsVirus.Models.Entities;
 
 namespace WeVsVirus.Business.Services
 {
-    public interface IPatientAccountService : IAccountService {}
+    public interface IPatientAccountService : IAccountService
+    {
+        Task<IdentityResult> ConfirmEmail(string userId, string token);
+    }
 
     public class PatientAccountService : AbstractAccountService, IPatientAccountService
     {
@@ -25,6 +28,12 @@ namespace WeVsVirus.Business.Services
         }
 
         private IAccountEmailService AccountEmailService { get; }
+
+        public async Task<IdentityResult> ConfirmEmail(string userId, string token)
+        {
+            var user = await UserManager.FindByNameAsync(userId);
+            return await UserManager.ConfirmEmailAsync(user, token);
+        }
 
         public override (IAccount Account, string AccessRole) ConvertToAccount(ISignUpViewModel model)
         {

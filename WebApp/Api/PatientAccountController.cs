@@ -12,6 +12,7 @@ using WeVsVirus.Business.Exceptions;
 using WeVsVirus.Business.ViewModels;
 using WeVsVirus.Business.Services;
 using WeVsVirus.Business.Services.EmailServices;
+using WeVsVirus.DataAccess;
 
 namespace WeVsVirus.WebApp.Api
 {
@@ -19,15 +20,18 @@ namespace WeVsVirus.WebApp.Api
     public class PatientAccountController : AccountController
     {
         public PatientAccountController(
+            IUnitOfWork unitOfWork,
             IPatientAccountService patientAccountService,
             IAccountEmailService accountEmailService,
             IAuthService authService) : base(authService)
         {
+            UnitOfWork = unitOfWork;
             PatientAccountService = patientAccountService;
             AccountEmailService = accountEmailService;
         }
 
         private IAccountEmailService AccountEmailService { get; }
+        public IUnitOfWork UnitOfWork { get; }
         private IPatientAccountService PatientAccountService { get; }
 
         [HttpPost("")]
@@ -61,5 +65,24 @@ namespace WeVsVirus.WebApp.Api
             return BadRequest(ModelState);
         }
 
+        [HttpGet("confirmemail")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            try
+            {
+                token = Uri.UnescapeDataString(token);
+                var result = await PatientAccountService.ConfirmEmail(userId, token);
+                await UnitOfWork.CompleteAsync();
+
+                if (result.Succeeded)
+                    return Ok();
+                else
+                    return BadRequest(result.Errors);
+            }
+            catch (Exception e)
+            {
+                throw new InternalServerErrorHttpException(e);
+            }
+        }
     }
 }
