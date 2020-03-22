@@ -5,6 +5,8 @@ import Accordion from "react-native-collapsible/Accordion";
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
 import Map from './Map'
+import {backendUrl} from "../data";
+
 export default function Home(navigation,route) {
 
   const [activeSections, setActiveSections] = React.useState([]);
@@ -15,7 +17,7 @@ export default function Home(navigation,route) {
 
   const completeJob = async (id) => {
      try {
-      const response = await fetch('https://localhost:5001/api/swabjob/complete', {
+      const response = await fetch(`${backendUrl}/swabjob/complete`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -37,7 +39,7 @@ export default function Home(navigation,route) {
   const getJobs = async () => {
  
     try {
-      const response = await fetch('https://localhost:5001/api/swabJobs/forMe', {
+      const response = await fetch(`${backendUrl}/swabJobs/forMe`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -65,7 +67,7 @@ export default function Home(navigation,route) {
   const acceptJob = async (id) => {
     console.log("Accept "+ global.deneme);
     try {
-      const response = await fetch('https://localhost:5001/api/swabJobs/accept', {
+      const response = await fetch(`${backendUrl}/swabJobs/accept`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

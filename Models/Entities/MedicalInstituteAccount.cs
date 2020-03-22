@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using WeVsVirus.Models.Enums;
 
 namespace WeVsVirus.Models.Entities
 {
