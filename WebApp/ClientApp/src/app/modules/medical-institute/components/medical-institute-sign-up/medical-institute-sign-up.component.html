@@ -1,80 +1,80 @@
 <mat-card>
-            <h2>Registrieren Sie Ihr medizinisches Institut </h2>
-            <h3>Für Krankenhäuser und das Gesundheitsamt</h3>
-            <br>
-            <form #signUpForm="ngForm" (ngSubmit)="signUp()">
+  <h2>Registrieren Sie Ihr medizinisches Institut </h2>
+  <h3>Für Krankenhäuser und das Gesundheitsamt</h3>
+  <br>
+  <form #signUpForm="ngForm" (ngSubmit)="onSaveClick()">
 
-                <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100 pb-2">
-                    <mat-label>Email</mat-label>
-                    <input matInput name="email" type="text" autocomplete="username" required placeholder="Email"
-                        [(ngModel)]="model.email" #email="ngModel" tmFocus validateEmail>
-                    <mat-icon matSuffix>mail</mat-icon>
-                    <mat-error [hidden]="email.valid || email.pristine">Keine gültige E-Mail-Adresse</mat-error>
-                </mat-form-field>
+    <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100 pb-2">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" type="text" autocomplete="username" required placeholder="Email"
+        [(ngModel)]="model.email" #email="ngModel" tmFocus validateEmail>
+      <mat-icon matSuffix>mail</mat-icon>
+      <mat-error [hidden]="email.valid || email.pristine">Keine gültige E-Mail-Adresse</mat-error>
+    </mat-form-field>
 
-                <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100 pb-2">
-                    <mat-label>Name des Instituts</mat-label>
-                    <input matInput name="instituteName" type="text" required [(ngModel)]="model.medicalInstituteName" #instituteName="ngModel">
-                    <mat-icon matSuffix>account_box</mat-icon>
-                    <mat-error [hidden]="instituteName.valid || instituteName.pristine">Name des Instituts fehlt</mat-error>
-                </mat-form-field>
+    <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100 pb-2">
+      <mat-label>Name des Instituts</mat-label>
+      <input matInput name="instituteName" type="text" required [(ngModel)]="model.medicalInstituteName"
+        #instituteName="ngModel">
+      <mat-icon matSuffix>local_hospital</mat-icon>
+      <mat-error [hidden]="instituteName.valid || instituteName.pristine">Name des Instituts fehlt</mat-error>
+    </mat-form-field>
 
-                <div class="row">
-                    <div class="col-12">
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Straße und Hausnummer</mat-label>
-                        <input matInput name="streetAndNumber" [(ngModel)]="model.address.streetAndNumber" required #streetAndNumber="ngModel">
-                        <mat-error [hidden]="streetAndNumber.valid || streetAndNumber.pristine">Straße und Hausnummer fehlen</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 col-md-4">
-      
-                      <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Postleitzahl</mat-label>
-                        <input matInput name="zipCode" maxlength="5" required #zipCode="ngModel" [(ngModel)]="model.address.zipCode">
-                        <mat-error [hidden]="zipCode.valid || zipCode.pristine">Straße und Hausnummer fehlen</mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-12 col-md-8">
-      
-                      <mat-form-field appearance="outline" class="d-inline">
-                        <mat-label>Stadt</mat-label>
-                        <input matInput name="city" required #city="ngModel" [(ngModel)]="model.address.city">
-                        <mat-error [hidden]="zipCode.valid || zipCode.pristine">Stadt fehlt</mat-error>
-                      </mat-form-field>
-                    </div>
-      
-                  </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Straße und Hausnummer</mat-label>
+          <input matInput name="streetAndNumber" [(ngModel)]="model.address.streetAndNumber" required
+            #streetAndNumber="ngModel">
+          <mat-error [hidden]="streetAndNumber.valid || streetAndNumber.pristine">Straße und Hausnummer fehlen
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-4">
 
-                <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100 pb-2">
-                    <mat-label>Passwort</mat-label>
-                    <input required matInput [(ngModel)]="model.password" name="password" type="password"
-                        autocomplete="new-password" #password="ngModel" required minlength="6">
-                    <mat-icon matSuffix>lock</mat-icon>
-                    <mat-error [hidden]="password.valid || password.pristine">Passwort muss aus mindestens sechs
-                        Zeichen bestehen</mat-error>
-                </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Postleitzahl</mat-label>
+          <input matInput name="zipCode" maxlength="5" required #zipCode="ngModel" [(ngModel)]="model.address.zipCode">
+          <mat-error [hidden]="zipCode.valid || zipCode.pristine">Straße und Hausnummer fehlen</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-md-8">
 
-                <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100">
-                    <mat-label>Passwort wiederholen</mat-label>
-                    <input required matInput [(ngModel)]="model.confirmPassword" name="confirm-password" type="password"
-                        #confirmPassword="ngModel" required validateEqual="password">
-                    <mat-icon matSuffix>lock</mat-icon>
-                    <mat-error [hidden]="confirmPassword.valid || confirmPassword.pristine">Die Passwörter stimmen
-                        nicht überein</mat-error>
-                </mat-form-field>
+        <mat-form-field appearance="outline" class="d-inline">
+          <mat-label>Stadt</mat-label>
+          <input matInput name="city" required #city="ngModel" [(ngModel)]="model.address.city">
+          <mat-error [hidden]="zipCode.valid || zipCode.pristine">Stadt fehlt</mat-error>
+        </mat-form-field>
+      </div>
 
-                <div class="ui-inputgroup" style="height: 50px">
-                    <button mat-flat-button color="primary" type="submit" label="Registrieren"
-                        [disabled]="signUpForm.invalid || isRequesting" *ngIf="!isRequesting"
-                        style="width:100%">REGISTRIEREN</button>
-                    <div *ngIf="isRequesting" style="text-align: center; width: 100%; height: 60%;">
-                        <mat-progress-spinner [style]="{width: '50px', height: '50px', margin: '0px'}" strokeWidth="8"
-                            fill="#EEEEEE" animationDuration=".5s">
-                        </mat-progress-spinner>
-                    </div>
-                </div>
-            </form>
-        </mat-card>
+    </div>
+
+    <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100 pb-2">
+      <mat-label>Passwort</mat-label>
+      <input required matInput [(ngModel)]="model.password" name="password" type="password" autocomplete="new-password"
+        #password="ngModel" required minlength="6">
+      <mat-icon matSuffix>lock</mat-icon>
+      <mat-error [hidden]="password.valid || password.pristine">Passwort muss aus mindestens sechs
+        Zeichen bestehen</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" hideRequiredMarker="true" class="w-100">
+      <mat-label>Passwort wiederholen</mat-label>
+      <input required matInput [(ngModel)]="model.confirmPassword" name="confirm-password" type="password"
+        #confirmPassword="ngModel" required validateEqual="password">
+      <mat-icon matSuffix>lock</mat-icon>
+      <mat-error [hidden]="confirmPassword.valid || confirmPassword.pristine">Die Passwörter stimmen
+        nicht überein</mat-error>
+    </mat-form-field>
+
+    <div style="height: 50px">
+      <button mat-flat-button color="primary" type="submit" label="Registrieren"
+        [disabled]="signUpForm.invalid || isRequesting" *ngIf="!isRequesting" style="width:100%">REGISTRIEREN</button>
+      <div *ngIf="isRequesting" style="text-align: center; width: 100%; height: 60%;">
+        <mat-spinner diameter="40" style="margin:0 auto;"></mat-spinner>
+      </div>
+    </div>
+  </form>
+</mat-card>

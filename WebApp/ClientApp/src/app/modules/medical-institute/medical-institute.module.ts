@@ -4,7 +4,7 @@ import { MedicalInstituteSignUpComponent } from './components/medical-institute-
 import { MedicalInstituteRoutingModule } from './medical-institute-routing.module';
 import { CustomAngularMaterialModule } from '../custom-angular-material/custom-angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MedicalInstituteComponent } from './components/hospital/medical-institute/medical-institute.component';
+import { MedicalInstituteComponent } from './components/medical-institute/medical-institute.component';
 
 @NgModule({
   imports: [

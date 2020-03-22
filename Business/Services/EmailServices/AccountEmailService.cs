@@ -9,6 +9,7 @@ namespace WeVsVirus.Business.Services.EmailServices
     public interface IAccountEmailService : IWeVsVirusEmailService
     {
         Task SendDriverSignUpMailAsync(DriverAccount account);
+        Task SendRegistrationConfirmationMailForMedicalInstitutAsync(MedicalInstituteAccount account);
     }
 
     public class AccountEmailService : WeVsVirusEmailService, IAccountEmailService
@@ -35,22 +36,42 @@ namespace WeVsVirus.Business.Services.EmailServices
             var passwordResetToken = await UserManager.GeneratePasswordResetTokenAsync(account.AppUser);
             passwordResetToken = Uri.EscapeDataString(passwordResetToken);
 
-            string receiverMail, receiverName;
-            SetReceiver(account.AppUser, out receiverMail, out receiverName);
-
             var templateId = EmailTemplateIds.DriverSignUpConfirmationLink;
             var templateData = GetEmailBodyDataForDriverSignUpConfirmationLink(account, passwordResetToken);
-            await EmailService.SendEmailWithSendGridTemplateAsync(receiverMail, receiverName, templateId, templateData);
+            await EmailService.SendEmailWithSendGridTemplateAsync(account.AppUser.Email, $"{account.Firstname} {account.Lastname}", templateId, templateData);
+        }
+
+
+        public async Task SendRegistrationConfirmationMailForMedicalInstitutAsync(MedicalInstituteAccount account)
+        {
+            if (account == null)
+            {
+                throw new ArgumentNullException(nameof(account));
+            }
+
+            var token = await UserManager.GenerateEmailConfirmationTokenAsync(account.AppUser);
+            token = Uri.EscapeDataString(token);
+
+            var templateId = EmailTemplateIds.HealthOfficeSignUpConfirmationLink;
+            var templateData = GetEmailBodyDataForMedicalInstituteSignUpConfirmationLink(account, token);
+            await EmailService.SendEmailWithSendGridTemplateAsync(account.AppUser.Email, account.Name, templateId, templateData);
         }
 
         private dynamic GetEmailBodyDataForDriverSignUpConfirmationLink(DriverAccount account, string token)
         {
             return new
             {
-                name = account.AppUser.Firstname,
-                // TODO don't call the driver Fahrer
-                accountType = "Fahrer",
+                name = account.Firstname,
                 url = $"{FrontendConfiguration.Url}driver-signup-confirmation?email={account.AppUser.UserName}&token={token}"
+            };
+        }
+
+        private dynamic GetEmailBodyDataForMedicalInstituteSignUpConfirmationLink(MedicalInstituteAccount account, string token)
+        {
+            return new
+            {
+                nameOfHealthOffice = account.Name,
+                url = $"{FrontendConfiguration.Url}medical-institute-signup-confirmation?email={account.AppUser.UserName}&token={token}"
             };
         }
     }
