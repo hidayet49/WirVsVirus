@@ -10,6 +10,7 @@ namespace WeVsVirus.Business.Services.EmailServices
     {
         Task SendDriverSignUpMailAsync(DriverAccount account);
         Task SendRegistrationConfirmationMailForMedicalInstitutAsync(MedicalInstituteAccount account);
+        Task SendRegistrationConfirmationMailForPatientAsync(PatientAccount account);
     }
 
     public class AccountEmailService : WeVsVirusEmailService, IAccountEmailService
@@ -57,6 +58,21 @@ namespace WeVsVirus.Business.Services.EmailServices
             await EmailService.SendEmailWithSendGridTemplateAsync(account.AppUser.Email, account.Name, templateId, templateData);
         }
 
+        public async Task SendRegistrationConfirmationMailForPatientAsync(PatientAccount account)
+        {
+            if (account == null)
+            {
+                throw new ArgumentNullException(nameof(account));
+            }
+
+            var token = await UserManager.GenerateEmailConfirmationTokenAsync(account.AppUser);
+            token = Uri.EscapeDataString(token);
+
+            var templateId = EmailTemplateIds.UserSignUpConfirmationLink;
+            var templateData = GetEmailBodyDataForPatientSignUpConfirmationLink(account, token);
+            await EmailService.SendEmailWithSendGridTemplateAsync(account.AppUser.Email, account.FullName, templateId, templateData);
+        }
+
         private dynamic GetEmailBodyDataForDriverSignUpConfirmationLink(DriverAccount account, string token)
         {
             return new
@@ -72,6 +88,14 @@ namespace WeVsVirus.Business.Services.EmailServices
             {
                 nameOfHealthOffice = account.Name,
                 url = $"{FrontendConfiguration.Url}medical-institute-signup-confirmation?email={account.AppUser.UserName}&token={token}"
+            };
+        }
+        private dynamic GetEmailBodyDataForPatientSignUpConfirmationLink(PatientAccount account, string token)
+        {
+            return new
+            {
+                name = account.FullName,
+                url = $"{FrontendConfiguration.Url}user-signup-confirmation?email={account.AppUser.UserName}&token={token}"
             };
         }
     }

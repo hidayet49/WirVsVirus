@@ -8,7 +8,7 @@ import { PatientSignUp } from '../models/patient-sign-up.model';
 export class PatientSignUpService extends AbstractHttpService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    super(baseUrl + 'api/medicalinstituteaccount');
+    super(baseUrl + 'api/patientaccount');
   }
 
   createUser(model: PatientSignUp) {

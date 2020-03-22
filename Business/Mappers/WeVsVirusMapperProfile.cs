@@ -32,6 +32,12 @@ namespace WeVsVirus.Business.Mappers
             .ForMember(dest => dest.Lat, opt => opt.MapFrom(src => src.GeoLocation.Coordinate.Y));
 
             CreateMap<AddressViewModel, Address>();
+            CreateMap<SignUpPatientViewModel, PatientAccount>()
+                .ForMember(dest => dest.AppUser, opt => opt.MapFrom(src => new AppUser
+                {
+                    Email = src.Email,
+                    UserName = src.Email
+                }));
         }
     }
 }

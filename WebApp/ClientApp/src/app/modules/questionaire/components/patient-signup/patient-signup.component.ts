@@ -3,7 +3,6 @@ import { Questionaire } from 'src/app/models/questionaire';
 import { Router } from '@angular/router';
 import { PatientSignUp } from '../../models/patient-sign-up.model';
 import { AlertService } from 'src/app/services/alert.service';
-import { MedicalInstituteSignUpService } from 'src/app/modules/medical-institute/services/medical-institute-sign-up.service';
 import { PatientSignUpService } from '../../services/patient-sign-up.service';
 import { QuestionaireStateService } from '../../services/questionaire-state.service';
 

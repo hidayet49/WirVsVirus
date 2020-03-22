@@ -14,10 +14,10 @@
 
     <mat-form-field appearance="outline" hideRequiredMarker="false" class="w-100 pb-2">
       <mat-label>Vorname</mat-label>
-      <input matInput name="givenname" type="text" required [(ngModel)]="model.givenname"
-        #givenname="ngModel">
+      <input matInput name="firstname" type="text" required [(ngModel)]="model.firstname"
+        #firstname="ngModel">
       <mat-icon matSuffix>account_box</mat-icon>
-      <mat-error [hidden]="givenname.valid || givenname.pristine">Vorname</mat-error>
+      <mat-error [hidden]="firstname.valid || firstname.pristine">Vorname fehlt</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" hideRequiredMarker="false" class="w-100 pb-2">
@@ -25,7 +25,7 @@
       <input matInput name="lastname" type="text" required [(ngModel)]="model.lastname"
         #lastname="ngModel">
       <mat-icon matSuffix>account_box</mat-icon>
-      <mat-error [hidden]="lastname.valid || lastname.pristine">Name des Instituts fehlt</mat-error>
+      <mat-error [hidden]="lastname.valid || lastname.pristine">Nachname fehlt</mat-error>
     </mat-form-field>
 
     <div class="row">
