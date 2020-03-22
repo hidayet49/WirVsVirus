@@ -16,6 +16,8 @@ function MainStackNavigator() {
       try {
         userToken = await SecureStore.getItemAsync("userToken");
         setToken(userToken);
+        global.theToken=userToken
+        
       } catch (e) {
         console.log(e);
       }
@@ -27,11 +29,11 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" headerMode = 'screen'>
-        {!token ? (
+        {token ? (
           <Stack.Screen name="SignIn" component={SignIn} options={ {headerShown: false}} />
         ) : (
           <>
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="The JOBS" component={Home} />
             <Stack.Screen
               name="Loading"
               component={Loading}
