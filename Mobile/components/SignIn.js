@@ -62,7 +62,7 @@ function SignIn({ navigation }) {
         setToken(myToken)
         SecureStore.setItemAsync("userToken", myToken);
         alert("You are succesfully Login...")
-        navigation.navigate('Home', { myToken: myToken });
+        navigation.navigate('The JOBS', { myToken: myToken });
       }
      catch (e) {
       console.log(e);
