@@ -21,7 +21,7 @@ import { ItemDiarrhoeaComponent } from './components/item-diarrhoea/item-diarrho
 import { ItemSoreThroatComponent } from './components/item-sore-throat/item-sore-throat.component';
 import { PatientSignupComponent } from './components/patient-signup/patient-signup.component';
 import { QustionaireSummaryComponent } from './components/qustionaire-summary/qustionaire-summary.component';
-import { QuestionaireStateService } from 'src/app/components/questionaire/services/questionaire-state.service';
+import { QuestionaireStateService } from 'src/app/modules/questionaire/services/questionaire-state.service';
 import { CustomAngularMaterialModule } from 'src/app/modules/custom-angular-material/custom-angular-material.module';
 import { PatientSignUpService } from './services/patient-sign-up.service';
 

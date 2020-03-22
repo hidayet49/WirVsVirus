@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Questionaire } from 'src/app/models/questionaire';
-import { QuestionaireStateService } from 'src/app/components/questionaire/services/questionaire-state.service';
+import { QuestionaireStateService } from 'src/app/modules/questionaire/services/questionaire-state.service';
 
 @Component({
   selector: 'app-qustionaire-summary',
