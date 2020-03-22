@@ -28,6 +28,19 @@ namespace WeVsVirus.DataAccess.DatabaseContext
                 fk.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
+            modelBuilder.Entity<SwabJobMatch>()
+                .HasKey(jobMatch => new { jobMatch.SwabJobId, jobMatch.DriverAccountId });
+            modelBuilder.Entity<SwabJobMatch>()
+                .HasOne(jobMatch => jobMatch.SwabJob)
+                .WithMany(job => job.SwabJobMatches)
+                .HasForeignKey(jobMatch => jobMatch.SwabJobId)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<SwabJobMatch>()
+                .HasOne(jobMatch => jobMatch.DriverAccount)
+                .WithMany(driverAccount => driverAccount.SwabJobMatches)
+                .HasForeignKey(jobMatch => jobMatch.DriverAccountId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(modelBuilder);
         }
 

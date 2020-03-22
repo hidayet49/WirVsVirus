@@ -21,5 +21,6 @@ namespace WeVsVirus.Models.Entities
         // public int PatientAccountId { get; set; }
         public int? DriverAccountId { get; set; }
         public DriverAccount DriverAccount { get; set; }
+        public ICollection<SwabJobMatch> SwabJobMatches { get; set; } = new List<SwabJobMatch>();
     }
 }
