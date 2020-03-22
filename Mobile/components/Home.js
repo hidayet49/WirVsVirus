@@ -11,7 +11,7 @@ import createOpenLink from 'react-native-open-maps';
 export default function Home(navigation, route) {
   const [activeSections, setActiveSections] = React.useState([]);
 
-  const [datas, setDatas] = React.useState([]);
+  const [datas, setDatas] = React.useState(data);
 
 const goToMap = (streetAndNumber,zipCode,city)=>{
     const destinationAddress = streetAndNumber+ ','+ city+','+zipCode;
@@ -20,7 +20,7 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
   }
 
   const completeJob = async (id) => {
-  data[id].ok = false;
+  datas[activeSections[0]].ok = false;
       alert("Thank You!!");
        /*try {
         const response = await fetch(`${backendUrl}/swabjob/complete`, {
@@ -72,7 +72,7 @@ const goToMap = (streetAndNumber,zipCode,city)=>{
   };
   const acceptJob = async (id) => {
     alert ("The job is accepted")
-    data[id].ok=true;
+    datas[activeSections[0]].ok=true;
     // console.log("Accept "+ global.deneme);
     // try {
     //   const response = await fetch(`${backendUrl}/swabJobs/accept`, {
