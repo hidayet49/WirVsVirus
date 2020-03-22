@@ -9,7 +9,9 @@ namespace WeVsVirus.Models.Entities
     {
         public int Id { get; set; }
 
-        public string  Givenname { get; set; }
+        public string Email { get; set; }
+
+        public string Givenname { get; set; }
 
         public string  Lastname { get; set; }
 

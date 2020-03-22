@@ -56,6 +56,10 @@ namespace WeVsVirus.DataAccess.DatabaseContext
                 .IsRequired();
 
             modelBuilder.Entity<PatientAccount>()
+                .Property(d => d.Email)
+                .IsRequired();
+
+            modelBuilder.Entity<PatientAccount>()
                 .Property(d => d.Givenname)
                 .HasMaxLength(100);
 
@@ -78,6 +82,10 @@ namespace WeVsVirus.DataAccess.DatabaseContext
             modelBuilder.Entity<PatientAccount>()
                 .Property(d => d.ZipCode)
                 .HasMaxLength(5);
+
+            modelBuilder.Entity<PatientAccount>()
+                .Property(d => d.Email)
+                .HasMaxLength(100);
         }
 
         public DbSet<DriverAccount> DriverAccounts { get; set; }
