@@ -24,7 +24,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist":{
+        "NSLocationWhenInUseUsageDescription": "to know current location of driver"
+      }
+    },
+    "android":{
+      "permissions": ["ACCESS_COARSE_LOCATION",
+      "ACCESS_FINE_LOCATION",
+      "CAMERA"
+    ]
     }
   }
 }
