@@ -3,6 +3,6 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "pn-zid",
+  "urlRandomness": "3d-pbs",
   "https": false
 }

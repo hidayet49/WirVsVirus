@@ -28,7 +28,7 @@ function MainStackNavigator() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" headerMode = 'screen'>
+      <Stack.Navigator initialRouteName="The JOBS" headerMode = 'screen'>
         {!token ? (
           <Stack.Screen name="SignIn" component={SignIn} options={ {headerShown: false}} />
         ) : (

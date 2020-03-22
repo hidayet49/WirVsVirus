@@ -6,6 +6,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "react-native-elements";
 import Map from './Map'
 import {backendUrl} from "../data";
+import createOpenLink from 'react-native-open-maps';
 
 export default function Home(navigation,route) {
 
@@ -15,7 +16,8 @@ export default function Home(navigation,route) {
   
 
   const goToMap = (streetAndNumber,zipCode,city)=>{
-
+    const destinationAddress = streetAndNumber+ ','+ city+','+zipCode;
+    createOpenLink({ travelType:'drive',  end: destinationAddress });
 
   }
   const completeJob = async (id) => {
@@ -121,8 +123,10 @@ export default function Home(navigation,route) {
         {!section.ok ? (
           <Button buttonStyle={{ padding: 14 }} title="Get Job" onPress={()=>acceptJob(section.id)} />
         ) : (
-          <Button buttonStyle={{ margin:5,padding: 14 }} title="I complete job" onPress={()=>goToMap(section.streetAndNumber,section.zipCode,section.city)} />
+          <View>
+          <Button buttonStyle={{ margin:5,padding: 14 }} title=" Go To Map" onPress={()=>goToMap(section.streetAndNumber,section.zipCode,section.city)} />
           <Button buttonStyle={{ padding: 14 }} title="I complete job" onPress={()=>completeJob(section.id)} />
+          </View>
         )}
       </View>
     );
